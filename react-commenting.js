@@ -11,7 +11,7 @@ class App extends Component{
   render(){
     return(
       <div>
-        {/* 1) Here: */}
+        {/* 1) Here: Calls on the class Board to be displayed */}
         <Board />
       </div>
     )
@@ -21,7 +21,7 @@ class App extends Component{
 class Board extends Component{
   constructor(){
     super()
-    // 2) Here:
+    // 2) Here: the state of gameBoard , currentPLayer, and winner is being definied
     this.state = {
       gameBoard: Array(9).fill(null),
       currentPlayer: "🦄",
@@ -30,7 +30,7 @@ class Board extends Component{
   }
 
   gamePlay = (index) => {
-    // 3) Here:
+    // 3) Here: this.state is being destructured
     const { gameBoard, currentPlayer, winner, clickCount } = this.state
     // 4) Here:
     if(gameBoard[index] === null && winner === null){
@@ -42,7 +42,7 @@ class Board extends Component{
       })
     }
     if(winner === null){
-      // 5) Here:
+      // 5) Here: winning displayes the this.state of the key winning
       this.winning()
     }
   }
@@ -62,7 +62,7 @@ class Board extends Component{
     winningConditions.map(value => {
       const [a, b, c] = value
       if(gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]){
-        // 6) Here:
+        // 6) Here: the state of winner is definied as currentPlayer
         this.setState({
           winner: currentPlayer
         })
@@ -72,14 +72,14 @@ class Board extends Component{
 
   render(){
     const { gameBoard, currentPlayer, winner } = this.state
-    // 7) Here:
+    // 7) Here: Here the gameBoard is being mapped over to display the value at a certain index
     let mappedGameBoard = gameBoard.map((value, index) => {
       return(
         <Square
           value={ value }
           index={ index }
           key={ index }
-          {/* 8) Here: */}
+          {/* 8) Here: gamePlay is the name that will be called in class Square to display this.gamePlay*/}
           gamePlay={ this.gamePlay }
         />
       )
@@ -89,17 +89,17 @@ class Board extends Component{
         <h1>Tic Tac Toe</h1>
 
           <div className="statusDiv">
-            {/* 9) Here: */}
+            {/* 9) Here:  what will be displayed is "the current player is: " and will show which player is current after "is:" */}
             The Current Player is: { currentPlayer }
           </div>
 
           <div className="statusDiv">
-            {/* 10) Here: */}
+            {/* 10) Here: "The winner is: " and will display the winner  */}
             The Winner is: { winner }
           </div>
 
           <div id="outcomeBoard">
-            {/* 11) Here: */}
+            {/* 11) Here: will show the mapped over gameBoard */}
             { mappedGameBoard }
           </div>
 
@@ -111,14 +111,14 @@ class Board extends Component{
 class Square extends Component{
 
   handleSquareClick = () => {
-    // 12) Here:
+    // 12) Here: you are callling on gamePlay form the parent class to handle onClick when pressing on the square class
     this.props.gamePlay(this.props.index)
   }
 
   render(){
     return(
       <div id="square" onClick={ this.handleSquareClick }>
-        {/* 13) Here: */}
+        {/* 13) Here: this displays the current player who clicked*/}
         { this.props.value }
       </div>
     )

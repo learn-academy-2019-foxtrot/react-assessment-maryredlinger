@@ -5,6 +5,20 @@
 
 // 1. Write a React component that prints "I am a component!" Be sure to include all necessary imports, exports, etc.
 
+import React, { Component } from 'react';
+
+class App extends React.Component {
+  render(){
+    return(
+      <div>
+        <h1>This is a component!</h1>
+      </div>
+      )
+  }
+}
+
+export default App
+
 
 
 
@@ -18,6 +32,13 @@ for(let i=0; i<names.length; i++){
 }
 
 
+//MY CHANGES:
+
+names.map((v,i) => {
+    console.log(`${names[i]} is ${names[i].length} characters long.`)
+})
+
+
 
 // 3. Destructure the following variables out of state.
 
@@ -27,6 +48,8 @@ this.state = {
   dislikes: ["mirrors", "garlic", "wooden stakes"]
 }
 
+const { name , home, dislikes } = this.state
+
 
 
 // 4. Write a React method that would add one and update the state of the count each time the method is called.
@@ -35,33 +58,40 @@ this.state = {
   count: 0
 }
 
+let {counter} = this.state
+this.setState({counter : counter + 1})
+
 
 
 // 5. There are four mistakes in this code that would cause it to break our application. Find the mistakes and fix them:
 
+
 import React, { Component } from 'react';
 
-class Recipes{
+// extends React
+class Recipes extends Component {
   constructor(props){
     super(props)
     this.state = {
-      recipes:
+      recipes : [
+        //array
         {name: 'Meatballs'},
         {name: 'Mac & Cheese'}
+      ]
     }
   }
-
   render() {
+    const { recipes } = this.state
+        let recipe = recipes.map(recipes => {
+        return (
+          <li key={recipes.name}>{recipes.name}</li>
+        )})
     return(
-      let recipe = recipes.map(recipe => {
-        return(
-          <li key={recipe.name}>{recipe.name}</li>
-        )
-      })
       <ul>
-        {recipe}
+        <li>{recipe}</li>
       </ul>
     )
   }
 }
+
 export default Recipes
